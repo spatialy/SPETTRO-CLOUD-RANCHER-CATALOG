@@ -1,5 +1,5 @@
-name: Taiga
-description: |
+name: Taiga (spettro)
+description: Project Management |
   Project management platform for agile developers
-version: v0.3
+version: v0.1
 category: Agile
