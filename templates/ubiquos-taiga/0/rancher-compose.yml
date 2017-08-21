@@ -1,6 +1,6 @@
 .catalog:
   name: "Taiga"
-  version: "v1"
+  version: "1.0.0"
   description: "Project management platform for agile developers"
   uuid: taiga-0
   minimum_rancher_version: v0.51.0
