@@ -1,0 +1,45 @@
+postgres:
+  image: postgres
+  environment:
+    - POSTGRES_DB=taiga_db
+    - POSTGRES_USER=taiga_user
+    - POSTGRES_PASSWORD=taiga10*+-
+  volumes:
+    - ${DATABASE}:/var/lib/postgresql/data
+
+rabbit:
+  image: rabbitmq:3
+  hostname: rabbit
+
+redis:
+  image: redis:3
+
+celery:
+  image: celery
+  links:
+    - rabbit
+
+events:
+  image: kartoffeltoby/taiga-events:latest
+  links:
+    - rabbit
+
+taiga:
+  image: kartoffeltoby/taiga:latest
+  restart: always
+  links:
+    - postgres
+    - events
+    - rabbit
+    - redis
+  environment:
+    - TAIGA_HOSTNAME=${DOMAIN}
+    - TAIGA_DB_HOST=postgres
+    - TAIGA_DB_NAME=taiga_db
+    - TAIGA_DB_USER=taiga_user
+    - TAIGA_DB_PASSWORD=taiga10*+-
+    - HTTPS_SELF_DOMAIN=${DOMAIN}
+    - TAIGA_SSL=True
+    - TAIGA_SLEEP=10
+  volumes:
+    - ${DATA}:/usr/src/taiga-back/media
