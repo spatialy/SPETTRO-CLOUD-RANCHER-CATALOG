@@ -1,9 +1,9 @@
 postgres:
   image: postgres
   environment:
-    - POSTGRES_DB=taiga_db
-    - POSTGRES_USER=taiga_user
-    - POSTGRES_PASSWORD=taiga10*+-
+    - POSTGRES_DB=taiga
+    - POSTGRES_USER=taiga
+    - POSTGRES_PASSWORD=password
   volumes:
     - ${DATABASE}:/var/lib/postgresql/data
 
@@ -35,9 +35,9 @@ taiga:
   environment:
     - TAIGA_HOSTNAME=${DOMAIN}
     - TAIGA_DB_HOST=postgres
-    - TAIGA_DB_NAME=taiga_db
-    - TAIGA_DB_USER=taiga_user
-    - TAIGA_DB_PASSWORD=taiga10*+-
+    - TAIGA_DB_NAME=taiga
+    - TAIGA_DB_USER=taiga
+    - TAIGA_DB_PASSWORD=password
     - HTTPS_SELF_DOMAIN=${DOMAIN}
     - TAIGA_SSL=True
     - TAIGA_SLEEP=10
