@@ -1,0 +1,24 @@
+version: '2'
+volumes:
+  /DEV-DATA/gitlab/gitlab-app-data:
+    driver: ${volumedriver}
+  /DEV-DATA/gitlab/gitlab-log-data:
+    driver: ${volumedriver}
+  /DEV-DATA/gitlab/gitlab-conf-files:
+    driver: ${volumedriver}
+
+services:
+  gitlab-server:
+    expose:
+      - "22"
+      - "80"
+      - "443"
+    image: gitlab/gitlab-ce
+    volumes:
+      - /DEV-DATA/gitlab/gitlab-app-data:/var/opt/gitlab
+      - /DEV-DATA/gitlab/gitlab-log-data:/var/log/gitlab
+      - /DEV-DATA/gitlab/gitlab-conf-files:/etc/gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url '${gitlab_omnipus_prefix}${gitlab_hostname}'
+        registry_external_url '${gitlab_omnipus_prefix}${registry_gitlab_hostname}'

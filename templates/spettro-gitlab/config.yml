@@ -1,0 +1,5 @@
+name: Gitlab CE (Spettro)
+description: |
+  Gitlab CE is a free GitHub alternative
+version: 9.4.5-ce.0
+category: Versioning
